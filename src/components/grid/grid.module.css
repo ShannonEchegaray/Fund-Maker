@@ -1,0 +1,14 @@
+.container {
+    width: 400px;
+    height: 90vh;
+    background-color: antiquewhite;
+    color: black;
+    border-radius: 2rem;
+    overflow: hidden;
+    display: grid;
+}
+
+.image {
+    background-color: aqua;
+    border: antiquewhite 2px dashed;
+}
