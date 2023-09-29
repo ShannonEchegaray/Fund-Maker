@@ -36,7 +36,33 @@ function App() {
     >
       <Grid 
         images={images} 
-        size={{ x: 4, y: 8 }}
+        layout={
+          { 
+            size: {x: 4, y: 8},
+            content: [
+              {
+                position: {
+                  x: 0,
+                  y: 0
+                },
+                size: {
+                  x: 4,
+                  y: 4
+                }
+              },
+              {
+                position: {
+                  x: 0,
+                  y: 4
+                },
+                size: {
+                  x: 4,
+                  y: 4
+                }
+              }
+            ] 
+          }
+        }
       />
     </DndProvider>
   )
