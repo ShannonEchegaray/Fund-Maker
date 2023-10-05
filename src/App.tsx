@@ -4,6 +4,7 @@ import Grid from './components/grid/grid'
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
 import { Image } from './components/grid/types'
+import Modal from './components/ui/modal/modal'
 
 function App() {
 
@@ -16,10 +17,11 @@ function App() {
       src: "Adios",
       text: "aeae"
     }
-  ])
+  ]);
+  const [showModal, setShowModal] = useState(false);
 
-  const handleDoubleClick = (index: number) => {
-    console.log("The content clicked is:", index);
+  const handleDoubleClick = (_index: number) => {
+    setShowModal(true);
   }
 
   return (
@@ -78,6 +80,12 @@ function App() {
           }
         }
       />
+      <Modal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+      >
+        Hola mundo
+      </Modal>
     </DndProvider>
   )
 }
