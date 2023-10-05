@@ -7,8 +7,3 @@
     overflow: hidden;
     display: grid;
 }
-
-.image {
-    background-color: aqua;
-    border: antiquewhite 2px dashed;
-}
