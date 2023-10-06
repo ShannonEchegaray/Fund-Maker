@@ -1,8 +1,19 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  min-height: 100vh;
   text-align: center;
+  display: grid;
+  grid-template-columns: 2fr 4fr;
+}
+
+main {
+  margin: 0 auto;
+  place-self: center;
+}
+
+aside {
+  border-right: 2px solid #00000017;
 }
 
 .logo {

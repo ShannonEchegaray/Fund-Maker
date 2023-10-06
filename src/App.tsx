@@ -19,19 +19,25 @@ function App() {
     }
   ]);
   const [showModal, setShowModal] = useState(false);
+  const [indexSelected, setIndexSelected] = useState<number | null>(null);
 
-  const handleDoubleClick = (_index: number) => {
-    setShowModal(true);
+  const handleClick = (index: number) => {
+    setIndexSelected(index);
   }
 
   return (
     <DndProvider
       backend={HTML5Backend}
     >
+      <aside>
+
+      </aside>
+      <main>
       <Grid 
-        onContainerDoubleClick = {handleDoubleClick}
+        onContainerDoubleClick={handleClick}
         onSwap={(images) => setImages(images)}
-        images={images} 
+        images={images}
+        selected={indexSelected}
         layout={
           { 
             size: {x: 8, y: 16},
@@ -75,11 +81,22 @@ function App() {
                   x: 6,
                   y: 6
                 }
+              },
+              {
+                position: {
+                  x: 0,
+                  y: 6
+                },
+                size: {
+                  x: 8,
+                  y: 10
+                }
               }
             ] 
           }
         }
-      />
+        />
+      </main>
       <Modal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
