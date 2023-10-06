@@ -7,11 +7,12 @@ import styles from "./item-droppable.module.css";
 interface ItemDroppableProps extends LayoutPart {
   id: number;
   onDrop: (from: number, to: number) => void;
-  onDoubleClick: (index: number) => void;
+  onClick: (index: number) => void;
+  selected: boolean;
   children?: React.ReactNode;
 }
 
-const ItemDroppable: React.FC<ItemDroppableProps> = ({ position, size, children, id, onDrop, onDoubleClick }) => {
+const ItemDroppable: React.FC<ItemDroppableProps> = ({ position, size, children, id, onDrop, onClick, selected }) => {
 
   const [{canDrop, isOver}, dropRef] = useDrop({
     accept: ItemTypes.ITEM_DRAGGABLE,
@@ -24,18 +25,21 @@ const ItemDroppable: React.FC<ItemDroppableProps> = ({ position, size, children,
     })
   })
 
-  const handleDoubleClick = () => {
-    onDoubleClick(id);
+  const handleClick = () => {
+    onClick(id);
   }
 
   const isDroppable = canDrop && isOver;
 
+  console.log(id, selected);
+
   return (
     <div
-      onDoubleClick={handleDoubleClick}
+      onClick={handleClick}
       ref={dropRef}
       className={styles.image}
       style={{
+        border: selected ? "blue 2px solid" : "antiquewhite 2px dashed",
         opacity: isDroppable ? 0.65 : 1,
         background: "#ccc",
         gridRowStart: position.y + 1,
