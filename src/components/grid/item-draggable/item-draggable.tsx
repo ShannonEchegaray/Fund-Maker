@@ -5,10 +5,11 @@ import styles from "./item-draggable.module.css";
 
 interface ItemDraggableProps {
   id: number;
+  onClick: (index: number, type: "draggable" | "droppable") => void;
   image: Image;
 }
 
-const ItemDraggable: React.FC<ItemDraggableProps> = ({ image, id }) => {
+const ItemDraggable: React.FC<ItemDraggableProps> = ({ image, id, onClick }) => {
   const [{ opacity }, dragRef] = useDrag(() => ({
     type: ItemTypes.ITEM_DRAGGABLE,
     item: [id, image],
@@ -17,9 +18,15 @@ const ItemDraggable: React.FC<ItemDraggableProps> = ({ image, id }) => {
     }),
   }));
 
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+
+    onClick(id, "draggable")
+  }
+
   return (
     <div
-      onDoubleClick={(e) => e.stopPropagation()}
+      onClick={handleClick}
       ref={dragRef}
       className={styles.image}
       style={{

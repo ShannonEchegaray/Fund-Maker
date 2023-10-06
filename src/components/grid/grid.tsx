@@ -8,11 +8,11 @@ interface GridProps {
   images: Image[];
   layout: Layout;
   onSwap: (images: Image[]) => void;
-  onContainerDoubleClick: (index: number) => void;
-  selected: number | null;
+  onClick: (index: number, type: "draggable" | "droppable") => void;
+  selected?: number | null;
 }
 
-const Grid: React.FC<GridProps> = ({ layout, images, onSwap, onContainerDoubleClick, selected }) => {
+const Grid: React.FC<GridProps> = ({ layout, images, onSwap, onClick, selected }) => {
 
   const handleDrop = (from: number, to: number) => {
     const imageCopy = [...images]
@@ -33,13 +33,19 @@ const Grid: React.FC<GridProps> = ({ layout, images, onSwap, onContainerDoubleCl
         <ItemDroppable
           selected={layoutIndex === selected}
           onDrop={handleDrop}
-          onClick={onContainerDoubleClick}
+          onClick={onClick}
           key={layoutIndex} 
           id={layoutIndex}
           position={layoutPart.position} 
           size={layoutPart.size}
           children={
-            images[layoutIndex] && <ItemDraggable id={layoutIndex} image={images[layoutIndex]} />
+            images[layoutIndex] && (
+              <ItemDraggable
+                onClick={onClick}
+                id={layoutIndex} 
+                image={images[layoutIndex]} 
+              />
+            )
           }
         />
       ))}

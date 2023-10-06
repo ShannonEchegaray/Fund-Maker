@@ -7,7 +7,7 @@ import styles from "./item-droppable.module.css";
 interface ItemDroppableProps extends LayoutPart {
   id: number;
   onDrop: (from: number, to: number) => void;
-  onClick: (index: number) => void;
+  onClick: (index: number, type: "droppable" | "draggable") => void;
   selected: boolean;
   children?: React.ReactNode;
 }
@@ -26,7 +26,7 @@ const ItemDroppable: React.FC<ItemDroppableProps> = ({ position, size, children,
   })
 
   const handleClick = () => {
-    onClick(id);
+    onClick(id, "droppable");
   }
 
   const isDroppable = canDrop && isOver;
